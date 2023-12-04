@@ -1,0 +1,15 @@
+div {
+  padding: 50px;
+}
+h2 {
+  color: green;
+  font-size: 38px;
+}
+p {
+  font-size: 18px;
+}
+button {
+  border-color: green;
+  padding: 10px 20px;
+  border-radius: 15px;
+}

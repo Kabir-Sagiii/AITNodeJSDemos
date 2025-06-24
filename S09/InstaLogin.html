@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Instagram Login</title>
+  </head>
+  <body
+    style="
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fafafa;
+    "
+  >
+    <!-- Page Wrapper -->
+    <div
+      style="
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        animation: fadeIn 1s ease-in;
+      "
+    >
+      <!-- Login Card -->
+      <div
+        style="
+          width: 350px;
+          background: white;
+          border: 1px solid #dbdbdb;
+          padding: 40px;
+          box-sizing: border-box;
+          border-radius: 8px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+          transition: transform 0.3s ease;
+        "
+      >
+        <!-- Logo -->
+        <div style="text-align: center; margin-bottom: 30px">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
+            alt="Instagram"
+            style="height: 60px; opacity: 0.9"
+          />
+        </div>
+
+        <!-- Form -->
+        <form>
+          <!-- Username -->
+          <input
+            type="text"
+            placeholder="Phone number, username, or email"
+            style="
+              width: 100%;
+              padding: 12px;
+              margin-bottom: 10px;
+              border: 1px solid #ccc;
+              border-radius: 5px;
+              font-size: 14px;
+              background: #f9f9f9;
+              box-sizing: border-box;
+              transition: border 0.3s ease;
+            "
+            onfocus="this.style.borderColor='#a3a3a3';"
+            onblur="this.style.borderColor='#ccc';"
+          />
+
+          <!-- Password -->
+          <input
+            type="password"
+            placeholder="Password"
+            style="
+              width: 100%;
+              padding: 12px;
+              margin-bottom: 14px;
+              border: 1px solid #ccc;
+              border-radius: 5px;
+              font-size: 14px;
+              background: #f9f9f9;
+              box-sizing: border-box;
+              transition: border 0.3s ease;
+            "
+            onfocus="this.style.borderColor='#a3a3a3';"
+            onblur="this.style.borderColor='#ccc';"
+          />
+
+          <!-- Login Button -->
+          <button
+            type="submit"
+            style="
+              width: 100%;
+              background-color: #3897f0;
+              color: white;
+              font-weight: bold;
+              font-size: 14px;
+              padding: 10px 0;
+              border: none;
+              border-radius: 6px;
+              cursor: pointer;
+              transition: background-color 0.3s ease;
+            "
+            onmouseover="this.style.backgroundColor='#2d77cc';"
+            onmouseout="this.style.backgroundColor='#3897f0';"
+          >
+            Log In
+          </button>
+
+          <!-- Divider -->
+          <div style="text-align: center; margin: 20px 0; position: relative">
+            <hr
+              style="
+                border: none;
+                border-top: 1px solid #dbdbdb;
+                position: absolute;
+                top: 50%;
+                width: 100%;
+                margin: 0;
+              "
+            />
+            <span
+              style="
+                background: white;
+                padding: 0 15px;
+                color: #8e8e8e;
+                font-size: 13px;
+                position: relative;
+              "
+              >OR</span
+            >
+          </div>
+
+          <!-- Facebook Login -->
+          <div style="text-align: center; margin-bottom: 14px">
+            <a
+              href="#"
+              style="
+                text-decoration: none;
+                color: #385185;
+                font-weight: 500;
+                font-size: 14px;
+                transition: color 0.3s ease;
+              "
+              onmouseover="this.style.color='#2b406e';"
+              onmouseout="this.style.color='#385185';"
+            >
+              <img
+                src="https://static.xx.fbcdn.net/rsrc.php/v3/yC/r/IOeX3GkNv8H.png"
+                alt="Facebook logo"
+                style="height: 16px; vertical-align: middle; margin-right: 6px"
+              />
+              Log in with Facebook
+            </a>
+          </div>
+
+          <!-- Forgot Password -->
+          <div style="text-align: center">
+            <a
+              href="#"
+              style="
+                font-size: 12px;
+                color: #00376b;
+                text-decoration: none;
+                transition: color 0.3s ease;
+              "
+              onmouseover="this.style.color='#002a57';"
+              onmouseout="this.style.color='#00376b';"
+            >
+              Forgot password?
+            </a>
+          </div>
+        </form>
+      </div>
+
+      <!-- Sign Up Box -->
+      <div
+        style="
+          width: 350px;
+          background: white;
+          border: 1px solid #dbdbdb;
+          text-align: center;
+          padding: 20px;
+          font-size: 14px;
+          margin-top: 12px;
+          border-radius: 8px;
+        "
+      >
+        Don't have an account?
+        <a
+          href="#"
+          style="
+            color: #3897f0;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.3s ease;
+          "
+          onmouseover="this.style.color='#2d77cc';"
+          onmouseout="this.style.color='#3897f0';"
+        >
+          Sign up
+        </a>
+      </div>
+    </div>
+
+    <!-- Fade-in Animation Keyframes (inline hack) -->
+    <style>
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </body>
+</html>

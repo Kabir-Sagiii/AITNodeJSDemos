@@ -1,0 +1,19 @@
+{
+    "users": [
+        {
+            "email": "raj@gmail.com",
+            "password": 12345,
+            "gender": "male"
+        },
+        {
+            "email": "sneha@gmail.com",
+            "password": 12345,
+            "gender": "female"
+        },
+        {
+            "email": "priya@gmail.com",
+            "password": 12345,
+            "gender": "female"
+        }
+    ]
+}

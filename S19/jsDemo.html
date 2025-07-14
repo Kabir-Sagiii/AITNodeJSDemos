@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      function f1() {
+        document.querySelector("h1").innerText = "Hello Javascript Engineer's";
+        document.querySelector("h1").style.color = "blue";
+      }
+      function f2() {
+        document.querySelector("h1").style.color = "green";
+      }
+      function f3() {
+        document.querySelector("h1").style.color = "red";
+      }
+    </script>
+    <style>
+      h1 {
+        color: red;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1 onmouseenter="f2()" onmouseleave="f3()">Welcome to Javascript</h1>
+    <button onclick="f1()">Modify</button>
+  </body>
+</html>

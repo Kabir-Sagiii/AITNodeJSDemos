@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Products - ModernWeb</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: #f8f9fa;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Header */
+      header {
+        background: white;
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 0;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #667eea;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+      }
+
+      .nav-links li {
+        margin-left: 2rem;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      .nav-links a:hover {
+        color: #667eea;
+      }
+
+      /* Hero Section */
+      .hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 120px 0 60px;
+        text-align: center;
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+      }
+
+      /* Filters */
+      .filters {
+        background: white;
+        padding: 2rem 0;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .filter-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .filter-group {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+      }
+
+      .filter-group label {
+        font-weight: 500;
+        color: #333;
+      }
+
+      .filter-select {
+        padding: 8px 12px;
+        border: 1px solid #e1e5e9;
+        border-radius: 5px;
+        background: white;
+      }
+
+      .search-box {
+        position: relative;
+      }
+
+      .search-box input {
+        padding: 8px 40px 8px 12px;
+        border: 1px solid #e1e5e9;
+        border-radius: 5px;
+        width: 250px;
+      }
+
+      .search-box button {
+        position: absolute;
+        right: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: #667eea;
+        cursor: pointer;
+      }
+
+      /* Products Grid */
+      .products {
+        padding: 3rem 0;
+      }
+
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+      }
+
+      .product-card {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .product-image {
+        height: 200px;
+        background: linear-gradient(45deg, #f093fb, #f5576c);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
+      }
+
+      .product-info {
+        padding: 1.5rem;
+      }
+
+      .product-category {
+        background: #667eea;
+        color: white;
+        padding: 4px 8px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        display: inline-block;
+        margin-bottom: 0.5rem;
+      }
+
+      .product-title {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: #333;
+      }
+
+      .product-description {
+        color: #666;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        line-height: 1.4;
+      }
+
+      .product-price {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #667eea;
+        margin-bottom: 1rem;
+      }
+
+      .product-rating {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+
+      .stars {
+        color: #ffd700;
+        margin-right: 0.5rem;
+      }
+
+      .rating-text {
+        color: #666;
+        font-size: 0.9rem;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 8px 16px;
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        color: white;
+        text-decoration: none;
+        border-radius: 25px;
+        font-weight: 500;
+        transition: transform 0.3s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .product-actions {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .btn-secondary {
+        background: #f8f9fa;
+        color: #667eea;
+        border: 1px solid #667eea;
+      }
+
+      .btn-secondary:hover {
+        background: #667eea;
+        color: white;
+      }
+
+      /* Pagination */
+      .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 3rem;
+      }
+
+      .pagination a {
+        padding: 8px 12px;
+        margin: 0 4px;
+        text-decoration: none;
+        color: #667eea;
+        border: 1px solid #667eea;
+        border-radius: 5px;
+        transition: background 0.3s ease;
+      }
+
+      .pagination a.active {
+        background: #667eea;
+        color: white;
+      }
+
+      .pagination a:hover {
+        background: #667eea;
+        color: white;
+      }
+
+      /* Footer */
+      footer {
+        background: #2c3e50;
+        color: white;
+        padding: 2rem 0;
+        text-align: center;
+        margin-top: 3rem;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .filter-container {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .filter-group {
+          justify-content: space-between;
+        }
+
+        .search-box input {
+          width: 100%;
+        }
+
+        .products-grid {
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+      }
+
+      @media (max-width: 480px) {
+        .nav-links {
+          display: none;
+        }
+
+        .hero h1 {
+          font-size: 2rem;
+        }
+
+        .products-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="container">
+        <div class="logo">ModernWeb</div>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/profile">Profile</a></li>
+          <li><a href="/produtcs">Products</a></li>
+          <li><a href="/login">Login</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="container">
+        <h1>Our Products</h1>
+        <p>Discover our amazing collection of premium products</p>
+      </div>
+    </section>
+
+    <section class="filters">
+      <div class="container">
+        <div class="filter-container">
+          <div class="filter-group">
+            <label for="category">Category:</label>
+            <select id="category" class="filter-select">
+              <option value="">All Categories</option>
+              <option value="electronics">Electronics</option>
+              <option value="clothing">Clothing</option>
+              <option value="books">Books</option>
+              <option value="home">Home & Garden</option>
+            </select>
+
+            <label for="sort">Sort by:</label>
+            <select id="sort" class="filter-select">
+              <option value="popular">Most Popular</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="rating">Highest Rated</option>
+            </select>
+          </div>
+
+          <div class="search-box">
+            <input type="text" placeholder="Search products..." />
+            <button>🔍</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="products">
+      <div class="container">
+        <div class="products-grid">
+          <div class="product-card">
+            <div class="product-image">📱</div>
+            <div class="product-info">
+              <span class="product-category">Electronics</span>
+              <h3 class="product-title">Smartphone Pro</h3>
+              <p class="product-description">
+                Latest smartphone with advanced features and stunning display.
+              </p>
+              <div class="product-price">$899</div>
+              <div class="product-rating">
+                <span class="stars">★★★★★</span>
+                <span class="rating-text">(4.8)</span>
+              </div>
+              <div class="product-actions">
+                <a href="#" class="btn">Add to Cart</a>
+                <a href="#" class="btn btn-secondary">View Details</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">💻</div>
+            <div class="product-info">
+              <span class="product-category">Electronics</span>
+              <h3 class="product-title">Laptop Ultra</h3>
+              <p class="product-description">
+                Powerful laptop for work and entertainment with long battery
+                life.
+              </p>
+              <div class="product-price">$1299</div>
+              <div class="product-rating">
+                <span class="stars">★★★★★</span>
+                <span class="rating-text">(4.9)</span>
+              </div>
+              <div class="product-actions">
+                <a href="#" class="btn">Add to Cart</a>
+                <a href="#" class="btn btn-secondary">View Details</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">🎧</div>
+            <div class="product-info">
+              <span class="product-category">Electronics</span>
+              <h3 class="product-title">Wireless Headphones</h3>
+              <p class="product-description">
+                Premium wireless headphones with noise cancellation.
+              </p>
+              <div class="product-price">$299</div>
+              <div class="product-rating">
+                <span class="stars">★★★★☆</span>
+                <span class="rating-text">(4.6)</span>
+              </div>
+              <div class="product-actions">
+                <a href="#" class="btn">Add to Cart</a>
+                <a href="#" class="btn btn-secondary">View Details</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">📚</div>
+            <div class="product-info">
+              <span class="product-category">Books</span>
+              <h3 class="product-title">Modern Web Development</h3>
+              <p class="product-description">
+                Comprehensive guide to modern web development techniques.
+              </p>
+              <div class="product-price">$49</div>
+              <div class="product-rating">
+                <span class="stars">★★★★★</span>
+                <span class="rating-text">(4.7)</span>
+              </div>
+              <div class="product-actions">
+                <a href="#" class="btn">Add to Cart</a>
+                <a href="#" class="btn btn-secondary">View Details</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">👕</div>
+            <div class="product-info">
+              <span class="product-category">Clothing</span>
+              <h3 class="product-title">Premium T-Shirt</h3>
+              <p class="product-description">
+                Comfortable and stylish t-shirt made from organic cotton.
+              </p>
+              <div class="product-price">$29</div>
+              <div class="product-rating">
+                <span class="stars">★★★★☆</span>
+                <span class="rating-text">(4.5)</span>
+              </div>
+              <div class="product-actions">
+                <a href="#" class="btn">Add to Cart</a>
+                <a href="#" class="btn btn-secondary">View Details</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">🏠</div>
+            <div class="product-info">
+              <span class="product-category">Home</span>
+              <h3 class="product-title">Smart Home Hub</h3>
+              <p class="product-description">
+                Control all your smart home devices from one central hub.
+              </p>
+              <div class="product-price">$199</div>
+              <div class="product-rating">
+                <span class="stars">★★★★★</span>
+                <span class="rating-text">(4.8)</span>
+              </div>
+              <div class="product-actions">
+                <a href="#" class="btn">Add to Cart</a>
+                <a href="#" class="btn btn-secondary">View Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pagination">
+          <a href="#" class="active">1</a>
+          <a href="#">2</a>
+          <a href="#">3</a>
+          <a href="#">Next</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2024 ModernWeb. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>

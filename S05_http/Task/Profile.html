@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile - ModernWeb</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: #f8f9fa;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Header */
+      header {
+        background: white;
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 0;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #667eea;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+      }
+
+      .nav-links li {
+        margin-left: 2rem;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      .nav-links a:hover {
+        color: #667eea;
+      }
+
+      /* Profile Layout */
+      .profile-container {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        gap: 2rem;
+        margin-top: 100px;
+        min-height: calc(100vh - 100px);
+      }
+
+      /* Sidebar */
+      .profile-sidebar {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        height: fit-content;
+      }
+
+      .profile-avatar {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        margin: 0 auto 1rem;
+        color: white;
+      }
+
+      .user-name {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      .user-email {
+        color: #666;
+        font-size: 0.9rem;
+      }
+
+      .profile-menu {
+        list-style: none;
+      }
+
+      .profile-menu li {
+        margin-bottom: 0.5rem;
+      }
+
+      .profile-menu a {
+        display: block;
+        padding: 12px 15px;
+        text-decoration: none;
+        color: #333;
+        border-radius: 8px;
+        transition: background 0.3s ease;
+      }
+
+      .profile-menu a:hover,
+      .profile-menu a.active {
+        background: #667eea;
+        color: white;
+      }
+
+      /* Main Content */
+      .profile-main {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+      }
+
+      .section-header {
+        display: flex;
+        justify-content: between;
+        align-items: center;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #e1e5e9;
+      }
+
+      .section-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: #333;
+      }
+
+      .btn {
+        padding: 8px 16px;
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        color: white;
+        text-decoration: none;
+        border-radius: 25px;
+        font-weight: 500;
+        transition: transform 0.3s ease;
+        border: none;
+        cursor: pointer;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .btn-secondary {
+        background: #f8f9fa;
+        color: #667eea;
+        border: 1px solid #667eea;
+      }
+
+      .btn-secondary:hover {
+        background: #667eea;
+        color: white;
+      }
+
+      /* Profile Info */
+      .profile-info {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .info-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .info-label {
+        display: block;
+        font-weight: 500;
+        color: #333;
+        margin-bottom: 0.5rem;
+      }
+
+      .info-value {
+        padding: 10px 12px;
+        border: 1px solid #e1e5e9;
+        border-radius: 8px;
+        background: #f8f9fa;
+        color: #666;
+      }
+
+      /* Stats Cards */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .stat-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        text-align: center;
+      }
+
+      .stat-number {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+      }
+
+      .stat-label {
+        opacity: 0.9;
+        font-size: 0.9rem;
+      }
+
+      /* Recent Activity */
+      .activity-list {
+        list-style: none;
+      }
+
+      .activity-item {
+        display: flex;
+        align-items: center;
+        padding: 1rem 0;
+        border-bottom: 1px solid #e1e5e9;
+      }
+
+      .activity-item:last-child {
+        border-bottom: none;
+      }
+
+      .activity-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #667eea;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+        color: white;
+      }
+
+      .activity-content {
+        flex: 1;
+      }
+
+      .activity-title {
+        font-weight: 500;
+        margin-bottom: 0.25rem;
+      }
+
+      .activity-time {
+        color: #666;
+        font-size: 0.8rem;
+      }
+
+      /* Settings Form */
+      .settings-form {
+        max-width: 600px;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: #333;
+      }
+
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #e1e5e9;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+      }
+
+      .form-group textarea {
+        resize: vertical;
+        min-height: 100px;
+      }
+
+      .checkbox-group {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .profile-container {
+          grid-template-columns: 1fr;
+          margin-top: 80px;
+        }
+
+        .profile-sidebar {
+          order: 2;
+        }
+
+        .profile-main {
+          order: 1;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .section-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="container">
+        <div class="logo">ModernWeb</div>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/profile">Profile</a></li>
+          <li><a href="/products">Products</a></li>
+          <li><a href="/login">Login</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="container">
+      <div class="profile-container">
+        <aside class="profile-sidebar">
+          <div class="profile-avatar">
+            <div class="avatar">👤</div>
+            <h3 class="user-name">John Doe</h3>
+            <p class="user-email">john.doe@example.com</p>
+          </div>
+
+          <ul class="profile-menu">
+            <li><a href="#overview" class="active">Overview</a></li>
+            <li><a href="#activity">Recent Activity</a></li>
+            <li><a href="#settings">Settings</a></li>
+            <li><a href="#security">Security</a></li>
+          </ul>
+        </aside>
+
+        <main class="profile-main">
+          <!-- Overview Section -->
+          <section id="overview">
+            <div class="section-header">
+              <h2 class="section-title">Profile Overview</h2>
+              <a href="#settings" class="btn btn-secondary">Edit Profile</a>
+            </div>
+
+            <div class="stats-grid">
+              <div class="stat-card">
+                <div class="stat-number">24</div>
+                <div class="stat-label">Orders</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-number">156</div>
+                <div class="stat-label">Reviews</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-number">$2,450</div>
+                <div class="stat-label">Total Spent</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-number">4.8</div>
+                <div class="stat-label">Average Rating</div>
+              </div>
+            </div>
+
+            <div class="profile-info">
+              <div class="info-group">
+                <label class="info-label">Full Name</label>
+                <div class="info-value">John Doe</div>
+              </div>
+              <div class="info-group">
+                <label class="info-label">Email</label>
+                <div class="info-value">john.doe@example.com</div>
+              </div>
+              <div class="info-group">
+                <label class="info-label">Phone</label>
+                <div class="info-value">+1 (555) 123-4567</div>
+              </div>
+              <div class="info-group">
+                <label class="info-label">Location</label>
+                <div class="info-value">New York, NY</div>
+              </div>
+              <div class="info-group">
+                <label class="info-label">Member Since</label>
+                <div class="info-value">January 2023</div>
+              </div>
+              <div class="info-group">
+                <label class="info-label">Account Status</label>
+                <div class="info-value">Active Premium Member</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Activity Section -->
+          <section id="activity" style="display: none">
+            <div class="section-header">
+              <h2 class="section-title">Recent Activity</h2>
+            </div>
+
+            <ul class="activity-list">
+              <li class="activity-item">
+                <div class="activity-icon">🛒</div>
+                <div class="activity-content">
+                  <div class="activity-title">Purchased Smartphone Pro</div>
+                  <div class="activity-time">2 hours ago</div>
+                </div>
+              </li>
+              <li class="activity-item">
+                <div class="activity-icon">⭐</div>
+                <div class="activity-content">
+                  <div class="activity-title">
+                    Left a review for Wireless Headphones
+                  </div>
+                  <div class="activity-time">1 day ago</div>
+                </div>
+              </li>
+              <li class="activity-item">
+                <div class="activity-icon">📝</div>
+                <div class="activity-content">
+                  <div class="activity-title">Updated profile information</div>
+                  <div class="activity-time">3 days ago</div>
+                </div>
+              </li>
+              <li class="activity-item">
+                <div class="activity-icon">💳</div>
+                <div class="activity-content">
+                  <div class="activity-title">Added new payment method</div>
+                  <div class="activity-time">1 week ago</div>
+                </div>
+              </li>
+              <li class="activity-item">
+                <div class="activity-icon">🎁</div>
+                <div class="activity-content">
+                  <div class="activity-title">
+                    Received loyalty points reward
+                  </div>
+                  <div class="activity-time">2 weeks ago</div>
+                </div>
+              </li>
+            </ul>
+          </section>
+
+          <!-- Settings Section -->
+          <section id="settings" style="display: none">
+            <div class="section-header">
+              <h2 class="section-title">Account Settings</h2>
+            </div>
+
+            <form class="settings-form">
+              <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" value="John" />
+              </div>
+
+              <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" value="Doe" />
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" value="john.doe@example.com" />
+              </div>
+
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" value="+1 (555) 123-4567" />
+              </div>
+
+              <div class="form-group">
+                <label for="bio">Bio</label>
+                <textarea id="bio" placeholder="Tell us about yourself...">
+Passionate tech enthusiast and avid shopper.</textarea
+                >
+              </div>
+
+              <div class="form-group">
+                <label for="country">Country</label>
+                <select id="country">
+                  <option value="us" selected>United States</option>
+                  <option value="ca">Canada</option>
+                  <option value="uk">United Kingdom</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <div class="checkbox-group">
+                  <input type="checkbox" id="newsletter" checked />
+                  <label for="newsletter">Subscribe to newsletter</label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="checkbox-group">
+                  <input type="checkbox" id="notifications" checked />
+                  <label for="notifications">Enable email notifications</label>
+                </div>
+              </div>
+
+              <div class="actions">
+                <button type="submit" class="btn">Save Changes</button>
+                <button type="button" class="btn btn-secondary">Cancel</button>
+              </div>
+            </form>
+          </section>
+
+          <!-- Security Section -->
+          <section id="security" style="display: none">
+            <div class="section-header">
+              <h2 class="section-title">Security Settings</h2>
+            </div>
+
+            <div class="settings-form">
+              <div class="form-group">
+                <label>Current Password</label>
+                <input type="password" placeholder="Enter current password" />
+              </div>
+
+              <div class="form-group">
+                <label>New Password</label>
+                <input type="password" placeholder="Enter new password" />
+              </div>
+
+              <div class="form-group">
+                <label>Confirm New Password</label>
+                <input type="password" placeholder="Confirm new password" />
+              </div>
+
+              <div class="actions">
+                <button type="submit" class="btn">Update Password</button>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <script>
+      // Simple tab switching functionality
+      document.querySelectorAll(".profile-menu a").forEach((link) => {
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          // Remove active class from all menu items
+          document.querySelectorAll(".profile-menu a").forEach((item) => {
+            item.classList.remove("active");
+          });
+
+          // Add active class to clicked item
+          this.classList.add("active");
+
+          // Hide all sections
+          document
+            .querySelectorAll(".profile-main section")
+            .forEach((section) => {
+              section.style.display = "none";
+            });
+
+          // Show selected section
+          const targetId = this.getAttribute("href").substring(1);
+          document.getElementById(targetId).style.display = "block";
+        });
+      });
+    </script>
+  </body>
+</html>
